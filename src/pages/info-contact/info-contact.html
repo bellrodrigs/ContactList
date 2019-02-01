@@ -7,37 +7,21 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Informações do contato
-        <ion-icon name="create" style="float: right;"> </ion-icon>
-        <ion-icon name="trash" style="float: right; margin-right: 20px;"></ion-icon>
-    </ion-title>
+    <ion-title>Informações do contato</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+<ion-card *ngFor="let user of users;">
+  <ion-card-header>
+    {{ user.nome }}
+  </ion-card-header>
+  <ion-card-content>
+   Telefone: {{ user.telefone }} <br />
+   Telefone 2: {{ user.telefone2 }} <br />
+   Celular: {{ user.celular }} <br />
+   Email: {{ user.email }} <br />
+  </ion-card-content>
+</ion-card>
 
-    <h1 style="text-align:center;">Nome do contato</h1>
-    <ion-list>
-      <ion-item>
-        <h2>Nome: <h3>Seu nome</h3>
-        </h2>
-      </ion-item>
-      <ion-item>
-        <h2>Telefone: <h3>Seu telefone</h3>
-        </h2>
-      </ion-item>
-      <ion-item>
-        <h2>Telefone 2: <h3>Seu telefone2</h3>
-        </h2>
-      </ion-item>
-      <ion-item>
-        <h2>Celular: <h3>Seu celular</h3>
-        </h2>
-      </ion-item>
-      <ion-item>
-        <h2>E-mail: <h3>Seu e-mail</h3>
-        </h2>
-      </ion-item>
-      
-    </ion-list>
 </ion-content>

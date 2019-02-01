@@ -12,13 +12,22 @@
 
 
   <ion-list>
-    <ion-item (click)="OpenInfoContact()" *ngFor="let user of users;">
+    <ion-item (click)="OpenInfoContact(
+      user.id,
+      user.nome,
+      user.telefone,
+      user.telefone2,
+      user.celular,
+      user.email
+    )"
+      *ngFor="let user of users;">
       <h2>
-        <ion-icon name="contact" style="margin-right:8px;" ></ion-icon>
+        <ion-icon name="contact" style="margin-right:8px;"></ion-icon>
         {{user.nome}}
       </h2>
       <h3 style="margin-left:20px;">Telefone: {{user.telefone}}</h3>
     </ion-item>
+    
   </ion-list>
 
   <ion-fab right bottom>

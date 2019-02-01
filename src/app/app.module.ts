@@ -12,13 +12,15 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AddPage } from '../pages/add/add';
 import { InfoContactPage } from '../pages/info-contact/info-contact';
+import { UpdatePage } from "../pages/update/update";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     AddPage,
-    InfoContactPage
+    InfoContactPage,
+    UpdatePage
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,8 @@ import { InfoContactPage } from '../pages/info-contact/info-contact';
     MyApp,
     HomePage,
     AddPage,
-    InfoContactPage
+    InfoContactPage,
+    UpdatePage
   ],
   providers: [
     StatusBar,

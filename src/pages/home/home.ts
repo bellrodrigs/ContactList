@@ -5,6 +5,8 @@ import { InfoContactPage } from '../info-contact/info-contact';
 import { PostProvider } from '../../providers/post-provider';
 import { getComponentViewDefinitionFactory } from '@angular/core/src/view';
 import { HttpClient } from '@angular/common/http';
+import { UpdatePage } from "../update/update";
+
 
 
 @Component({
@@ -17,6 +19,7 @@ export class HomePage {
   users: any;
 
 
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -27,10 +30,6 @@ export class HomePage {
 
   }
 
-  OpenInfoContact() {
-    this.navCtrl.push(InfoContactPage);
-  }
-
   openAddPage() {
     this.navCtrl.push(AddPage);
   }
@@ -39,28 +38,10 @@ export class HomePage {
     this.users = [];
     this.load();
 
-
   }
 
   apiUrl = 'http://localhost/crud/get.php';
-  /*
-   load(){
-      let body = {
-        load: "get_contact"
-      };
-      this.http.post(this.apiUrl, JSON.stringify(body))
-      .subscribe((data:Response) =>{
-        this.users=data.text();
-        console.log(this.users);
-        console.log("res", data);
-        console.log("body", body);
-  
-  
-      }
-      );
-    }*/
-
-
+ 
   load() {
 
     let body = {
@@ -68,12 +49,8 @@ export class HomePage {
     };
     this.PstPvdr.postData(body, 'get.php')
       .subscribe((data: any) => {
-        console.log("console home printa data:", data);
-        console.log(JSON.parse(data));
         for (let user of JSON.parse(data).result) {
           this.users.push(user);
-          console.log("users", this.users);
-          console.log(JSON.parse(data).result);
         }
       },
        (err) => {
@@ -81,4 +58,35 @@ export class HomePage {
         }
       );
   }
+
+  OpenInfoContact(id){
+    this.navCtrl.push(InfoContactPage, {
+      'id' : id
+    });
+  }
+
+  editContact(id,nome,telefone,telefone2,celular,email){
+    this.navCtrl.push(UpdatePage, {
+      'id' : id,
+      'nome' : nome,
+      'telefone' : telefone,
+      'telefone2' : telefone2,
+      'celular' : celular,
+      'email' : email
+    });
+  }
+
+  deleteContact(id){
+    let body = {
+      id : id,
+      add: "delete_contact"
+    };
+    this.PstPvdr.postData(body, 'delete.php')
+      .subscribe((data) => {
+        this.appCtrl.getRootNav().setRoot(HomePage);
+      });
+  }
+  
 }
+
+
