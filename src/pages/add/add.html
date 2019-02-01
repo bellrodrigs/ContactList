@@ -1,0 +1,52 @@
+<!--
+  Generated template for the AddPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Acionar Contato</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+        <ion-list>
+          <ion-item>
+            <ion-label>Nome</ion-label>
+            <ion-input type="text" [(ngModel)]="nome" name="nome"></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Telefone</ion-label>
+            <ion-input type="text" [(ngModel)]="telefone" name="telefone" ></ion-input>
+          </ion-item>
+      
+          <ion-item *ngIf="!alive">
+            <p style="color:blue; float: right;" (click)="alive = !alive" >Adicionar outro telefone
+              <ion-icon name="add"></ion-icon>
+            </p>
+          </ion-item>
+      
+          <ion-item *ngIf="alive" >
+            <ion-label>Telefone 2</ion-label>
+            <ion-input type="text" [(ngModel)]="telefone2" name="telefone2"></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Celular</ion-label>
+            <ion-input type="text" [(ngModel)]="celular" name="celular"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>E-mail</ion-label>
+            <ion-input type="text" [(ngModel)]="email" name="email"></ion-input>
+          </ion-item>
+        </ion-list>
+          <button ion-button (click)="add()" block>Salvar</button>
+          <button ion-button (click)="backHome()" color="danger" block>Cancelar</button>
+      
+</ion-content>

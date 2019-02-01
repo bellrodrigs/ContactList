@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Agenda
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
+
+  <ion-list>
+    <ion-item (click)="OpenInfoContact()" *ngFor="let user of users;">
+      <h2>
+        <ion-icon name="contact" style="margin-right:8px;" ></ion-icon>
+        {{user.nome}}
+      </h2>
+      <h3 style="margin-left:20px;">Telefone: {{user.telefone}}</h3>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="openAddPage()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
+</ion-content>
