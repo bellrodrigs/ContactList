@@ -37,7 +37,11 @@
       <ion-label>E-mail</ion-label>
       <ion-input type="text" [(ngModel)]="email" name="email"></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-label>Endereço</ion-label>
+      <ion-input type="text" [(ngModel)]="endereco" name="endereco"></ion-input>
+    </ion-item>
   </ion-list>
     <button ion-button (click)="editar()" block>Salvar</button>
-    <button ion-button (click)="backHome()" color="danger" block>Cancelar</button>
+    <button ion-button (click)="backHome()" color="danger" block>Voltar</button>
 </ion-content>

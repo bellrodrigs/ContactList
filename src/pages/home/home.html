@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar >
     <ion-title>
       Agenda
     </ion-title>
@@ -8,32 +8,92 @@
 
 <ion-content padding>
 
-  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar><br />
+  
 
+  <ion-grid *ngFor="let user of items;">
+    <ion-row>
+      <ion-col>
+        <div (click)="OpenInfoContact(
+          user.id,
+          user.nome,
+          user.telefone,
+          user.telefone2,
+          user.celular,
+          user.email,
+          user.endereco 
+        )">
+          <ion-list>
+            <ion-item>
+              <ion-icon class="userIcon" name="contact" item-start ></ion-icon>
+              <h2 class="titleUser">{{user.nome}}</h2>
+              <p>Tel: {{user.telefone}}</p>
+              <p>Cel: {{user.celular}}</p>
 
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-col>
+      <ion-col col-2>
+        <div class="icones">
+          <ion-icon name="create" color="primary" (click)="editContact(
+            user.id,
+            user.nome,
+            user.telefone,
+            user.telefone2,
+            user.celular,
+            user.email,
+            user.endereco
+      )"></ion-icon><br />
+          <ion-icon name="trash" color="danger" (click)="deleteContact(user.id)"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab right bottom>
+      <button ion-fab class="addButton" (click)="openAddPage()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab>
+
+  <!--
   <ion-list>
-    <ion-item (click)="OpenInfoContact(
-      user.id,
+      <ion-item *ngFor="let user of users;">
+        <div
+        (click)="OpenInfoContact(
+          user.id,
+          user.nome,
+          user.telefone,
+          user.telefone2,
+          user.celular,
+          user.email
+        )"
+        >
+        <h2>{{user.nome}}</h2>
+        <h3>Telefone: {{user.telefone}}</h3>
+      </div>
+        <div class="icones">
+          <ion-icon  name="create" color="primary" 
+          (click)="editContact(
+            user.id,
       user.nome,
       user.telefone,
       user.telefone2,
       user.celular,
       user.email
-    )"
-      *ngFor="let user of users;">
-      <h2>
-        <ion-icon name="contact" style="margin-right:8px;"></ion-icon>
-        {{user.nome}}
-      </h2>
-      <h3 style="margin-left:20px;">Telefone: {{user.telefone}}</h3>
-    </ion-item>
-    
+      )"
+          ></ion-icon>
+          <ion-icon  name="trash" color="danger" (click)="deleteContact(user.id)"></ion-icon>
+        </div>
+      </ion-item>
   </ion-list>
 
   <ion-fab right bottom>
-    <button ion-fab color="primary" (click)="openAddPage()">
-      <ion-icon name="add"></ion-icon>
-    </button>
-  </ion-fab>
+      <button ion-fab color="sucess" (click)="openAddPage()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab>
+  -->
 
 </ion-content>

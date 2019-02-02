@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, App } from 'ionic-angular';
+import { NavController, NavParams, App, ToastController } from 'ionic-angular';
 import { AddPage } from '../add/add';
 import { InfoContactPage } from '../info-contact/info-contact';
 import { PostProvider } from '../../providers/post-provider';
@@ -17,6 +17,7 @@ export class HomePage {
   public contacts;
 
   users: any;
+  items: any;
 
 
 
@@ -25,7 +26,8 @@ export class HomePage {
     public navParams: NavParams,
     private PstPvdr: PostProvider,
     private appCtrl: App,
-    private http: HttpClient
+    private http: HttpClient,
+    public toastCtrl :ToastController
   ) {
 
   }
@@ -37,7 +39,8 @@ export class HomePage {
   ionViewDidLoad() {
     this.users = [];
     this.load();
-
+    this.initializeItems();
+    console.log("usuarios:",this.users);
   }
 
   apiUrl = 'http://localhost/crud/get.php';
@@ -65,14 +68,15 @@ export class HomePage {
     });
   }
 
-  editContact(id,nome,telefone,telefone2,celular,email){
+  editContact(id,nome,telefone,telefone2,celular,email,endereco){
     this.navCtrl.push(UpdatePage, {
       'id' : id,
       'nome' : nome,
       'telefone' : telefone,
       'telefone2' : telefone2,
       'celular' : celular,
-      'email' : email
+      'email' : email,
+      'endereco' : endereco
     });
   }
 
@@ -84,8 +88,35 @@ export class HomePage {
     this.PstPvdr.postData(body, 'delete.php')
       .subscribe((data) => {
         this.appCtrl.getRootNav().setRoot(HomePage);
+        const toast = this.toastCtrl.create({
+          message: 'Contato deletado',
+          duration: 3000
+        });
+        toast.present();
       });
   }
+
+  initializeItems() {
+    this.items = this.users;
+    console.log("items",this.items);
+
+  }
+
+  getItems(ev: any) {
+    // Reset items back to all of the items
+    this.initializeItems();
+
+    // set val to the value of the searchbar
+    const val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.items = this.items.filter((user) => {
+        return (user.nome.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+  }
+
   
 }
 

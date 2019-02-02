@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, ToastController } from 'ionic-angular';
 import { PostProvider } from '../../providers/post-provider';
+import {HomePage} from '../home/home';
 
 /**
  * Generated class for the UpdatePage page.
@@ -20,11 +21,13 @@ export class UpdatePage {
   telefone2: string;
   celular: string;
   email: string;
+  endereco: string;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
     private PstPvdr: PostProvider, 
-    private appCtrl: App
+    private appCtrl: App,
+    public toastCtrl :ToastController
     ) {
   }
   ionViewDidLoad() {
@@ -34,7 +37,8 @@ export class UpdatePage {
     this.telefone2 = this.navParams.get('telefone2');
     this.celular = this.navParams.get('celular');
     this.email = this.navParams.get('email');
-    console.log('ionViewDidLoad UpdatePage');
+    this.endereco = this.navParams.get('endereco');
+    console.log(this.endereco);
   }
   editar() {
     let body = {
@@ -44,14 +48,24 @@ export class UpdatePage {
       telefone2: this.telefone2,
       celular: this.celular,
       email: this.email,
+      endereco: this.endereco,
       add: "edit_contact"
     };
     this.PstPvdr.postData(body, 'update.php')
       .subscribe((data) => {
         this.appCtrl.getRootNav().setRoot(UpdatePage);
-        alert("Contato editado com sucesso");
+        const toast = this.toastCtrl.create({
+          message: 'Contato editado com sucesso',
+          duration: 3000
+        });
+        toast.present();
       }, (err) => {
         console.log(err);
       });
   }
+
+  backHome() {
+    this.navCtrl.push(HomePage);
+  }
+
 }

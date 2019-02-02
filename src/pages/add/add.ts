@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, ToastController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { HttpClient } from '@angular/common/http';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
@@ -29,6 +29,7 @@ export class AddPage {
   telefone2: string = "";
   celular: string = "";
   email: string = "";
+  endereco: string = "";
 
 
   constructor(
@@ -36,7 +37,8 @@ export class AddPage {
     public navParams: NavParams,
     private PstPvdr: PostProvider,
     private appCtrl: App,
-    private http: HttpClient
+    private http: HttpClient,
+    public toastCtrl :ToastController
   ) {
   }
 
@@ -45,23 +47,31 @@ export class AddPage {
 
   }
 
+ 
   backHome() {
     this.navCtrl.push(HomePage);
   }
   
-  add() {
+  add(event) {
     let body = {
       nome: this.nome,
       telefone: this.telefone,
       telefone2: this.telefone2,
       celular: this.celular,
       email: this.email,
+      endereco: this.endereco,
       add: "add_contact"
     };
     this.PstPvdr.postData(body, 'index.php')
     .subscribe((data)=>{
       this.appCtrl.getRootNav().setRoot(AddPage);
-      alert("Cadastro realizado com sucesso");
+      const toast = this.toastCtrl.create({
+        message: 'Contato cadastrado com sucesso',
+        duration: 3000
+      });
+      toast.present();
+      console.log(data)
+      event.preventDefault();
     },
     (err)=>{
       console.log(err);

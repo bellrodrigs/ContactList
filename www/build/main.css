@@ -25673,3 +25673,79 @@ ion-navbar.toolbar {
   min-height: calc(46px + constant(safe-area-inset-bottom));
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
+
+ion-content {
+  background-color: #f0f0f0 !important;
+}
+
+.toolbar-title {
+  color: #fff;
+}
+
+.header .toolbar-background {
+  background-color: #ff6937;
+}
+
+ion-item {
+  background-color: #f0f0f0 !important;
+}
+
+.userIcon {
+  color: #ff6937 !important;
+}
+
+.addButton {
+  background-color: #ff6937 !important;
+}
+
+ion-label {
+  color: #ff6937 !important;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+
+page-home .icones {
+  float: right !important;
+  font-size: 20px;
+  margin-top: 13px;
+}
+
+page-home .toolbar-title {
+  text-align: center;
+}
+
+page-home .titleUser {
+  font-weight: bold;
+  color: #ff6937;
+}
+
+page-home .userIcon {
+  font-size: 30px;
+}
+
+page-info-contact .thumb {
+  margin-top: 55px;
+  background: #ff6937;
+  height: 150px;
+  color: white;
+  text-align: center;
+}
+
+page-info-contact .thumbIcon {
+  color: white;
+  font-size: 116px;
+  text-align: center !important;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  padding: 0;
+  margin: 0;
+}
+
+page-info-contact .titleThumb {
+  margin: 0;
+  padding: 0;
+}
+
+page-info-contact .span {
+  font-weight: bold;
+}

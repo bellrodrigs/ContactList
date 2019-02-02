@@ -11,17 +11,20 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-<ion-card *ngFor="let user of users;">
-  <ion-card-header>
-    {{ user.nome }}
-  </ion-card-header>
-  <ion-card-content>
-   Telefone: {{ user.telefone }} <br />
-   Telefone 2: {{ user.telefone2 }} <br />
-   Celular: {{ user.celular }} <br />
-   Email: {{ user.email }} <br />
-  </ion-card-content>
-</ion-card>
+<ion-content *ngFor="let user of users;">
+  <div class="thumb">
+    <ion-icon class="thumbIcon" name="contact" item-start></ion-icon>
+    <h1 class="titleThumb" bottom>{{ user.nome }}</h1>
+  </div>
+
+  <ion-card>
+    <ion-card-content>
+      <h2><span class="span">Telefone:</span> <span style="float: right">{{ user.telefone }}</span></h2><hr /> 
+      <h2><span class="span">Telefone 2:</span> <span style="float: right;">{{ user.telefone2 }}</span></h2> <hr />  
+      <h2><span class="span">Celular:</span> <span style="float: right;">{{ user.celular }}</span></h2><hr /> 
+      <h2><span class="span">Email:</span> <span style="float: right;">{{ user.email }}</span> </h2><hr /> 
+      <h2><span class="span">Endereço:</span> <span style="float: right;">{{ user.endereco }}</span></h2>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

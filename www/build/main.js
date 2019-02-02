@@ -7,7 +7,7 @@ webpackJsonp([3],{
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(80);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_post_provider__ = __webpack_require__(41);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -31,17 +31,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var AddPage = /** @class */ (function () {
-    function AddPage(navCtrl, navParams, PstPvdr, appCtrl, http) {
+    function AddPage(navCtrl, navParams, PstPvdr, appCtrl, http, toastCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.PstPvdr = PstPvdr;
         this.appCtrl = appCtrl;
         this.http = http;
+        this.toastCtrl = toastCtrl;
         this.nome = "";
         this.telefone = "";
         this.telefone2 = "";
         this.celular = "";
         this.email = "";
+        this.endereco = "";
     }
     AddPage_1 = AddPage;
     AddPage.prototype.ionViewDidLoad = function () {
@@ -50,7 +52,7 @@ var AddPage = /** @class */ (function () {
     AddPage.prototype.backHome = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */]);
     };
-    AddPage.prototype.add = function () {
+    AddPage.prototype.add = function (event) {
         var _this = this;
         var body = {
             nome: this.nome,
@@ -58,25 +60,33 @@ var AddPage = /** @class */ (function () {
             telefone2: this.telefone2,
             celular: this.celular,
             email: this.email,
+            endereco: this.endereco,
             add: "add_contact"
         };
         this.PstPvdr.postData(body, 'index.php')
             .subscribe(function (data) {
             _this.appCtrl.getRootNav().setRoot(AddPage_1);
-            alert("Cadastro realizado com sucesso");
+            var toast = _this.toastCtrl.create({
+                message: 'Contato cadastrado com sucesso',
+                duration: 3000
+            });
+            toast.present();
+            console.log(data);
+            event.preventDefault();
         }, function (err) {
             console.log(err);
         });
     };
     AddPage = AddPage_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-add',template:/*ion-inline-start:"C:\Users\isabel\Documents\Ionic\agenda\src\pages\add\add.html"*/'<!--\n  Generated template for the AddPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Acionar Contato</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n        <ion-list>\n          <ion-item>\n            <ion-label>Nome</ion-label>\n            <ion-input type="text" [(ngModel)]="nome" name="nome"></ion-input>\n          </ion-item>\n      \n          <ion-item>\n            <ion-label>Telefone</ion-label>\n            <ion-input type="text" [(ngModel)]="telefone" name="telefone" ></ion-input>\n          </ion-item>\n      \n          <ion-item *ngIf="!alive">\n            <p style="color:blue; float: right;" (click)="alive = !alive" >Adicionar outro telefone\n              <ion-icon name="add"></ion-icon>\n            </p>\n          </ion-item>\n      \n          <ion-item *ngIf="alive" >\n            <ion-label>Telefone 2</ion-label>\n            <ion-input type="text" [(ngModel)]="telefone2" name="telefone2"></ion-input>\n          </ion-item>\n      \n          <ion-item>\n            <ion-label>Celular</ion-label>\n            <ion-input type="text" [(ngModel)]="celular" name="celular"></ion-input>\n          </ion-item>\n          <ion-item>\n            <ion-label>E-mail</ion-label>\n            <ion-input type="text" [(ngModel)]="email" name="email"></ion-input>\n          </ion-item>\n        </ion-list>\n          <button ion-button (click)="add()" block>Salvar</button>\n          <button ion-button (click)="backHome()" color="danger" block>Cancelar</button>\n      \n</ion-content>'/*ion-inline-end:"C:\Users\isabel\Documents\Ionic\agenda\src\pages\add\add.html"*/,
+            selector: 'page-add',template:/*ion-inline-start:"C:\Users\isabel\Documents\Ionic\agenda\src\pages\add\add.html"*/'<!--\n  Generated template for the AddPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Acionar Contato</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n        <ion-list>\n          <ion-item>\n            <ion-label>Nome</ion-label>\n            <ion-input type="text" [(ngModel)]="nome" name="nome"></ion-input>\n          </ion-item>\n      \n          <ion-item>\n            <ion-label>Telefone</ion-label>\n            <ion-input type="text" [(ngModel)]="telefone" name="telefone" ></ion-input>\n          </ion-item>\n      \n          <ion-item *ngIf="!alive">\n            <p style="color:blue; float: right;" (click)="alive = !alive" >Adicionar outro telefone\n              <ion-icon name="add"></ion-icon>\n            </p>\n          </ion-item>\n      \n          <ion-item *ngIf="alive">\n            <ion-label>Telefone 2</ion-label>\n            <ion-input type="text" [(ngModel)]="telefone2" name="telefone2"></ion-input>\n          </ion-item>\n      \n          <ion-item>\n            <ion-label>Celular</ion-label>\n            <ion-input type="text" [(ngModel)]="celular" name="celular"></ion-input>\n          </ion-item>\n          <ion-item>\n            <ion-label>E-mail</ion-label>\n            <ion-input type="text" [(ngModel)]="email" name="email"></ion-input>\n          </ion-item>\n          <ion-item>\n            <ion-label>Endereço</ion-label>\n            <ion-input type="text" [(ngModel)]="endereco" name="endereco"></ion-input>\n          </ion-item>\n        </ion-list>\n          <button ion-button (click)="add($event)" block>Salvar</button>\n          <button ion-button (click)="backHome()" color="danger" block>Voltar</button>\n      \n</ion-content>'/*ion-inline-end:"C:\Users\isabel\Documents\Ionic\agenda\src\pages\add\add.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_4__providers_post_provider__["a" /* PostProvider */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* App */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */]])
+            __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ToastController */]])
     ], AddPage);
     return AddPage;
     var AddPage_1;
@@ -142,7 +152,7 @@ var InfoContactPage = /** @class */ (function () {
     };
     InfoContactPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-info-contact',template:/*ion-inline-start:"C:\Users\isabel\Documents\Ionic\agenda\src\pages\info-contact\info-contact.html"*/'<!--\n  Generated template for the InfoContactPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Informações do contato</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n<ion-card *ngFor="let user of users;">\n  <ion-card-header>\n    {{ user.nome }}\n  </ion-card-header>\n  <ion-card-content>\n   Telefone: {{ user.telefone }} <br />\n   Telefone2: {{ user.telefone2 }} <br />\n   Celular: {{ user.celular }} <br />\n   Email: {{ user.email }} <br />\n  </ion-card-content>\n</ion-card>\n\n  <!--\n    <h1 style="text-align:center;" [(ngModel)]="nome" value="nome"></h1>\n    <ion-list>\n      <ion-item>\n        <h2>Nome: <h3 [(ngModel)]="nome" value="nome"></h3>\n        </h2>\n      </ion-item>\n      <ion-item>\n        <h2>Telefone: <h3 [(ngModel)]="telefone" value="telefone"></h3>\n        </h2>\n      </ion-item>\n      <ion-item>\n        <h2>Telefone 2: <h3 [(ngModel)]="telefone2" value="telefone2"></h3>\n        </h2>\n      </ion-item>\n      <ion-item>\n        <h2>Celular: <h3 [(ngModel)]="celular" value="celular"></h3>\n        </h2>\n      </ion-item>\n      <ion-item>\n        <h2>E-mail: <h3 [(ngModel)]="email" value="email"></h3>\n        </h2>\n      </ion-item>\n      \n    </ion-list>\n  -->\n</ion-content>'/*ion-inline-end:"C:\Users\isabel\Documents\Ionic\agenda\src\pages\info-contact\info-contact.html"*/,
+            selector: 'page-info-contact',template:/*ion-inline-start:"C:\Users\isabel\Documents\Ionic\agenda\src\pages\info-contact\info-contact.html"*/'<!--\n  Generated template for the InfoContactPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Informações do contato</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content *ngFor="let user of users;">\n  <div class="thumb">\n    <ion-icon class="thumbIcon" name="contact" item-start></ion-icon>\n    <h1 class="titleThumb" bottom>{{ user.nome }}</h1>\n  </div>\n\n  <ion-card>\n    <ion-card-content>\n      <h2><span class="span">Telefone:</span> <span style="float: right">{{ user.telefone }}</span></h2><hr /> \n      <h2><span class="span">Telefone 2:</span> <span style="float: right;">{{ user.telefone2 }}</span></h2> <hr />  \n      <h2><span class="span">Celular:</span> <span style="float: right;">{{ user.celular }}</span></h2><hr /> \n      <h2><span class="span">Email:</span> <span style="float: right;">{{ user.email }}</span> </h2><hr /> \n      <h2><span class="span">Endereço:</span> <span style="float: right;">{{ user.endereco }}</span></h2>\n    </ion-card-content>\n  </ion-card>\n\n</ion-content>'/*ion-inline-end:"C:\Users\isabel\Documents\Ionic\agenda\src\pages\info-contact\info-contact.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
@@ -164,6 +174,7 @@ var InfoContactPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_post_provider__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(47);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -176,6 +187,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /**
  * Generated class for the UpdatePage page.
  *
@@ -183,11 +195,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var UpdatePage = /** @class */ (function () {
-    function UpdatePage(navCtrl, navParams, PstPvdr, appCtrl) {
+    function UpdatePage(navCtrl, navParams, PstPvdr, appCtrl, toastCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.PstPvdr = PstPvdr;
         this.appCtrl = appCtrl;
+        this.toastCtrl = toastCtrl;
     }
     UpdatePage_1 = UpdatePage;
     UpdatePage.prototype.ionViewDidLoad = function () {
@@ -197,7 +210,8 @@ var UpdatePage = /** @class */ (function () {
         this.telefone2 = this.navParams.get('telefone2');
         this.celular = this.navParams.get('celular');
         this.email = this.navParams.get('email');
-        console.log('ionViewDidLoad UpdatePage');
+        this.endereco = this.navParams.get('endereco');
+        console.log(this.endereco);
     };
     UpdatePage.prototype.editar = function () {
         var _this = this;
@@ -208,24 +222,33 @@ var UpdatePage = /** @class */ (function () {
             telefone2: this.telefone2,
             celular: this.celular,
             email: this.email,
+            endereco: this.endereco,
             add: "edit_contact"
         };
         this.PstPvdr.postData(body, 'update.php')
             .subscribe(function (data) {
             _this.appCtrl.getRootNav().setRoot(UpdatePage_1);
-            alert("Contato editado com sucesso");
+            var toast = _this.toastCtrl.create({
+                message: 'Contato editado com sucesso',
+                duration: 3000
+            });
+            toast.present();
         }, function (err) {
             console.log(err);
         });
     };
+    UpdatePage.prototype.backHome = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__home_home__["a" /* HomePage */]);
+    };
     UpdatePage = UpdatePage_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-update',template:/*ion-inline-start:"C:\Users\isabel\Documents\Ionic\agenda\src\pages\update\update.html"*/'<!--\n  Generated template for the UpdatePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Editar</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item>\n      <ion-label>Nome</ion-label>\n      <ion-input type="text" [(ngModel)]="nome" name="nome"></ion-input>\n    </ion-item>\n  \n    <ion-item>\n      <ion-label>Telefone</ion-label>\n      <ion-input type="text" [(ngModel)]="telefone" name="telefone" ></ion-input>\n    </ion-item>\n  \n    <ion-item >\n      <ion-label>Telefone 2</ion-label>\n      <ion-input type="text" [(ngModel)]="telefone2" name="telefone2"></ion-input>\n    </ion-item>\n  \n    <ion-item>\n      <ion-label>Celular</ion-label>\n      <ion-input type="text" [(ngModel)]="celular" name="celular"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>E-mail</ion-label>\n      <ion-input type="text" [(ngModel)]="email" name="email"></ion-input>\n    </ion-item>\n  </ion-list>\n    <button ion-button (click)="editar()" block>Salvar</button>\n    <button ion-button (click)="backHome()" color="danger" block>Cancelar</button>\n</ion-content>\n'/*ion-inline-end:"C:\Users\isabel\Documents\Ionic\agenda\src\pages\update\update.html"*/,
+            selector: 'page-update',template:/*ion-inline-start:"C:\Users\isabel\Documents\Ionic\agenda\src\pages\update\update.html"*/'<!--\n  Generated template for the UpdatePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Editar</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item>\n      <ion-label>Nome</ion-label>\n      <ion-input type="text" [(ngModel)]="nome" name="nome"></ion-input>\n    </ion-item>\n  \n    <ion-item>\n      <ion-label>Telefone</ion-label>\n      <ion-input type="text" [(ngModel)]="telefone" name="telefone" ></ion-input>\n    </ion-item>\n  \n    <ion-item >\n      <ion-label>Telefone 2</ion-label>\n      <ion-input type="text" [(ngModel)]="telefone2" name="telefone2"></ion-input>\n    </ion-item>\n  \n    <ion-item>\n      <ion-label>Celular</ion-label>\n      <ion-input type="text" [(ngModel)]="celular" name="celular"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>E-mail</ion-label>\n      <ion-input type="text" [(ngModel)]="email" name="email"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Endereço</ion-label>\n      <ion-input type="text" [(ngModel)]="endereco" name="endereco"></ion-input>\n    </ion-item>\n  </ion-list>\n    <button ion-button (click)="editar()" block>Salvar</button>\n    <button ion-button (click)="backHome()" color="danger" block>Voltar</button>\n</ion-content>\n'/*ion-inline-end:"C:\Users\isabel\Documents\Ionic\agenda\src\pages\update\update.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__providers_post_provider__["a" /* PostProvider */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* App */]])
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* App */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ToastController */]])
     ], UpdatePage);
     return UpdatePage;
     var UpdatePage_1;
@@ -313,7 +336,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_common_http__ = __webpack_require__(80);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_post_provider__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_component__ = __webpack_require__(279);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_home_home__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_home_home__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_add_add__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_info_contact_info_contact__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_update_update__ = __webpack_require__(105);
@@ -392,7 +415,7 @@ var AppModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(202);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(47);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -473,7 +496,7 @@ var PostProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 79:
+/***/ 47:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -502,12 +525,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var HomePage = /** @class */ (function () {
-    function HomePage(navCtrl, navParams, PstPvdr, appCtrl, http) {
+    function HomePage(navCtrl, navParams, PstPvdr, appCtrl, http, toastCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.PstPvdr = PstPvdr;
         this.appCtrl = appCtrl;
         this.http = http;
+        this.toastCtrl = toastCtrl;
         this.apiUrl = 'http://localhost/crud/get.php';
     }
     HomePage_1 = HomePage;
@@ -517,6 +541,8 @@ var HomePage = /** @class */ (function () {
     HomePage.prototype.ionViewDidLoad = function () {
         this.users = [];
         this.load();
+        this.initializeItems();
+        console.log("usuarios:", this.users);
     };
     HomePage.prototype.load = function () {
         var _this = this;
@@ -538,14 +564,15 @@ var HomePage = /** @class */ (function () {
             'id': id
         });
     };
-    HomePage.prototype.editContact = function (id, nome, telefone, telefone2, celular, email) {
+    HomePage.prototype.editContact = function (id, nome, telefone, telefone2, celular, email, endereco) {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__update_update__["a" /* UpdatePage */], {
             'id': id,
             'nome': nome,
             'telefone': telefone,
             'telefone2': telefone2,
             'celular': celular,
-            'email': email
+            'email': email,
+            'endereco': endereco
         });
     };
     HomePage.prototype.deleteContact = function (id) {
@@ -557,17 +584,39 @@ var HomePage = /** @class */ (function () {
         this.PstPvdr.postData(body, 'delete.php')
             .subscribe(function (data) {
             _this.appCtrl.getRootNav().setRoot(HomePage_1);
+            var toast = _this.toastCtrl.create({
+                message: 'Contato deletado',
+                duration: 3000
+            });
+            toast.present();
         });
+    };
+    HomePage.prototype.initializeItems = function () {
+        this.items = this.users;
+        console.log("items", this.items);
+    };
+    HomePage.prototype.getItems = function (ev) {
+        // Reset items back to all of the items
+        this.initializeItems();
+        // set val to the value of the searchbar
+        var val = ev.target.value;
+        // if the value is an empty string don't filter the items
+        if (val && val.trim() != '') {
+            this.items = this.items.filter(function (user) {
+                return (user.nome.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            });
+        }
     };
     HomePage = HomePage_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"C:\Users\isabel\Documents\Ionic\agenda\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Agenda\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n\n\n  <ion-list>\n    <ion-item (click)="OpenInfoContact(\n      user.id,\n      user.nome,\n      user.telefone,\n      user.telefone2,\n      user.celular,\n      user.email\n    )"\n      *ngFor="let user of users;">\n      <h2>\n        <ion-icon name="contact" style="margin-right:8px;"></ion-icon>\n        {{user.nome}}\n      </h2>\n      <h3 style="margin-left:20px;">Telefone: {{user.telefone}}</h3>\n    </ion-item>\n    \n  </ion-list>\n\n  <ion-fab right bottom>\n    <button ion-fab color="primary" (click)="openAddPage()">\n      <ion-icon name="add"></ion-icon>\n    </button>\n  </ion-fab>\n\n</ion-content>'/*ion-inline-end:"C:\Users\isabel\Documents\Ionic\agenda\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"C:\Users\isabel\Documents\Ionic\agenda\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar >\n    <ion-title>\n      Agenda\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar><br />\n  \n\n  <ion-grid *ngFor="let user of items;">\n    <ion-row>\n      <ion-col>\n        <div (click)="OpenInfoContact(\n          user.id,\n          user.nome,\n          user.telefone,\n          user.telefone2,\n          user.celular,\n          user.email,\n          user.endereco \n        )">\n          <ion-list>\n            <ion-item>\n              <ion-icon class="userIcon" name="contact" item-start ></ion-icon>\n              <h2 class="titleUser">{{user.nome}}</h2>\n              <p>Tel: {{user.telefone}}</p>\n              <p>Cel: {{user.celular}}</p>\n\n            </ion-item>\n          </ion-list>\n        </div>\n      </ion-col>\n      <ion-col col-2>\n        <div class="icones">\n          <ion-icon name="create" color="primary" (click)="editContact(\n            user.id,\n            user.nome,\n            user.telefone,\n            user.telefone2,\n            user.celular,\n            user.email,\n            user.endereco\n      )"></ion-icon><br />\n          <ion-icon name="trash" color="danger" (click)="deleteContact(user.id)"></ion-icon>\n        </div>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <ion-fab right bottom>\n      <button ion-fab class="addButton" (click)="openAddPage()">\n        <ion-icon name="add"></ion-icon>\n      </button>\n    </ion-fab>\n\n  <!--\n  <ion-list>\n      <ion-item *ngFor="let user of users;">\n        <div\n        (click)="OpenInfoContact(\n          user.id,\n          user.nome,\n          user.telefone,\n          user.telefone2,\n          user.celular,\n          user.email\n        )"\n        >\n        <h2>{{user.nome}}</h2>\n        <h3>Telefone: {{user.telefone}}</h3>\n      </div>\n        <div class="icones">\n          <ion-icon  name="create" color="primary" \n          (click)="editContact(\n            user.id,\n      user.nome,\n      user.telefone,\n      user.telefone2,\n      user.celular,\n      user.email\n      )"\n          ></ion-icon>\n          <ion-icon  name="trash" color="danger" (click)="deleteContact(user.id)"></ion-icon>\n        </div>\n      </ion-item>\n  </ion-list>\n\n  <ion-fab right bottom>\n      <button ion-fab color="sucess" (click)="openAddPage()">\n        <ion-icon name="add"></ion-icon>\n      </button>\n    </ion-fab>\n  -->\n\n</ion-content>'/*ion-inline-end:"C:\Users\isabel\Documents\Ionic\agenda\src\pages\home\home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_4__providers_post_provider__["a" /* PostProvider */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* App */],
-            __WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */]])
+            __WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ToastController */]])
     ], HomePage);
     return HomePage;
     var HomePage_1;
