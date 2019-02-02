@@ -20,5 +20,5 @@ app.use(function(req,res,nex){
 app.use(express.static('www'));
 app.set('port', process.env.PORT || 5000);
 app.listen(app.get('port'), function(){
-    console.log("express ouvindo");
+    console.log("express ouvindo"); 
 });
